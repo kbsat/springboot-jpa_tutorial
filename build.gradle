@@ -8,24 +8,37 @@ group = 'jpabook'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+// lombok 때문에 넣어준 코드
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
 }
 
+// mavenCentral에서 의존성을 불러옴
 repositories {
 	mavenCentral()
 }
 
+// 해당 공간에 작성한 의존성들을 모두 불러옴
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	// 개발을 쉽게 도와주는 devtools 추가하면 restartedMain이 뜨면 잘 추가 된 것
+	// 후에 view만 recompile하면 웹에서 변경된 화면 확인 가능
+	implementation 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
+
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//JUnit4 추가
+	testImplementation("org.junit.vintage:junit-vintage-engine") {
+		exclude group: "org.hamcrest", module: "hamcrest-core"
+	}
 }
 
 test {
